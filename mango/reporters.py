@@ -11,7 +11,7 @@ class TextReporter:
 
     def add_scalar(self, name, value, iteration):
         header = click.style('SCALAR', fg='green', bold=True)
-        click.echo(f"{header} {name}: {value: 10} [it={iteration: 10}]")
+        click.echo(f"{header}[it={iteration: 9}] {name}: {value: 10}")
 
 
 class LogReporter:
