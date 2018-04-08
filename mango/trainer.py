@@ -46,6 +46,9 @@ class MiniBatchLoader:
         random.shuffle(randomized)
 
         for batch in partition(self.batch_size, randomized):
+            if len(batch) == 0:
+                continue
+            
             yield self._reduce([self.dataset[b] for b in batch])
 
     def __len__(self):
@@ -53,7 +56,7 @@ class MiniBatchLoader:
 
     def _reduce(self, items):
         if len(items) == 0:
-            return items
+            raise ValueError("Can't reduce")
         else:
             proto = items[0]
             return {key: np.array([i[key] for i in items])
