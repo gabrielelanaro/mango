@@ -35,7 +35,7 @@ class MiniBatchTrainer:
                                      max_epoch=self.epochs,
                                      global_step=i + j * len(loader))
                 self.model.batch(batch, step_info)
-            self.model.epoch(step_info)
+            self.model.epoch(step_info, self.dataset)
 
 
 class MiniBatchLoader:
