@@ -26,7 +26,7 @@ class LogReporter:
 
     def log(self, value):
         fname = os.path.join(self.logdir, 'out.log')
-        self._write(fname, '{}'.format(value))
+        self._write(fname, '{}\n'.format(value))
 
     def add_scalar(self, name, value, iteration):
         name = name.replace('/', '.')
