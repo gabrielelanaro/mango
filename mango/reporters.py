@@ -55,3 +55,6 @@ class CombinedReporter:
 
     def add_scalar(self, name, value, iteration):
         [r.add_scalar(name, value, iteration) for r in self.reporters if hasattr(r, 'add_scalar')]
+
+    def log(self, value):
+        [r.log(value) for r in self.reporters if hasattr(r, 'log')]
