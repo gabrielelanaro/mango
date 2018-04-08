@@ -1,6 +1,6 @@
 from typing import NamedTuple
 import random
-from toolz import partition_all
+from toolz import partition
 import numpy as np
 
 class CrossValidationTrainer:
@@ -45,7 +45,7 @@ class MiniBatchLoader:
         randomized = list(range(size))
         random.shuffle(randomized)
 
-        for batch in partition_all(self.batch_size, randomized):
+        for batch in partition(self.batch_size, randomized):
             yield self._reduce([self.dataset[b] for b in batch])
 
     def __len__(self):
