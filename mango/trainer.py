@@ -29,7 +29,11 @@ class MiniBatchTrainer:
 
         for j in range(self.epochs):
             for i, batch in enumerate(loader):
-                step_info = StepInfo(step=i, max_steps=len(loader), epoch=j, max_epoch=self.epochs, global_step=i + j * len(loader))
+                step_info = StepInfo(step=i,
+                                     max_steps=len(loader),
+                                     epoch=j,
+                                     max_epoch=self.epochs,
+                                     global_step=i + j * len(loader))
                 self.model.batch(batch, step_info)
             self.model.epoch(step_info)
 
@@ -48,11 +52,11 @@ class MiniBatchLoader:
         for batch in partition(self.batch_size, randomized):
             if len(batch) == 0:
                 continue
-            
+
             yield self._reduce([self.dataset[b] for b in batch])
 
     def __len__(self):
-        return len(self.dataset)
+        return len(self.dataset) // self.batch_size
 
     def _reduce(self, items):
         if len(items) == 0:
