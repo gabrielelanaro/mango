@@ -13,10 +13,14 @@ class TensorboardReporter:
         self._writer.add_scalar(name, scalar, global_step)
 
     def add_embedding(self, name, embedding, labels=None, images=None, iteration=0):
-        embedding = np.array(embedding)
+        embedding = np.array(embedding).astype('float')
         self._writer.add_embedding(torch.FloatTensor(embedding),
                                    metadata=labels,
                                    global_step=iteration)
+
+    def add_histogram(self, name, data, iteration, bins='auto'):
+        values = np.array(data).astype('float')
+        self._writer.add_histogram(name, torch.FloatTensor(values), global_step=iteration, bins=bins)
 
     def _create_dirs(self, logdir):
         if not os.path.exists(logdir):
