@@ -1,17 +1,4 @@
 import os
-import time
-import click
-
-
-class TextReporter:
-
-    def log(self, value):
-        header = click.style('LOG', fg='green', bold=True)
-        click.echo(f"{header}: {value}")
-
-    def add_scalar(self, name, value, iteration):
-        header = click.style('SCALAR', fg='green', bold=True)
-        click.echo(f"{header}[it={iteration: 9}] {name}: {value: 10}")
 
 
 class LogReporter:
@@ -45,16 +32,3 @@ class LogReporter:
         name = name.replace('/', '.')
         scalar_fname = os.path.join(self.logdir, f'{name}.csv')
         self._write(scalar_fname, f'{iteration}\t{value}\n')
-
-
-
-class CombinedReporter:
-
-    def __init__(self, reporters):
-        self.reporters = reporters
-
-    def add_scalar(self, name, value, iteration):
-        [r.add_scalar(name, value, iteration) for r in self.reporters if hasattr(r, 'add_scalar')]
-
-    def log(self, value):
-        [r.log(value) for r in self.reporters if hasattr(r, 'log')]
