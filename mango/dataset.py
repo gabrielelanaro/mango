@@ -1,3 +1,5 @@
+from .base import Parameterized
 
-class Dataset:
+
+class Dataset(Parameterized):
     pass

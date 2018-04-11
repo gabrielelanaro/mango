@@ -1,3 +1,4 @@
+from .base import Param, Parameterized
 from typing import NamedTuple
 import random
 from toolz import partition
@@ -13,16 +14,15 @@ class CrossValidationTrainer:
         self.model.train(self.dataset.X, self.dataset.y)
 
 
-class MiniBatchTrainer:
+class MiniBatchTrainer(Parameterized):
 
-    batch_size: int
-    epochs: int
+    batch_size = Param(int, 32)
+    epochs = Param(int, 10)
 
     def __init__(self, model, dataset, batch_size=32, epochs=10):
+        super().__init__(batch_size=batch_size, epochs=epochs)
         self.model = model
         self.dataset = dataset
-        self.batch_size = batch_size
-        self.epochs = epochs
 
     def train(self):
         loader = MiniBatchLoader(self.dataset, batch_size=self.batch_size)
