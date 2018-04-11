@@ -16,4 +16,6 @@ class Test(mango.Experiment):
             reporters.tensorboard.TensorboardReporter()
         ])
     )
-    trainer = mango.CrossValidationTrainer(model, dataset)
+    train_loader = IndexedLoader(dataset)
+    test_loader = IndexedLoader(dataset)
+    trainer = mango.ScikitTrainer(model, train_loader, test_loader)
