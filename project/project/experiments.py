@@ -16,6 +16,5 @@ class Test(mango.Experiment):
             reporters.tensorboard.TensorboardReporter()
         ])
     )
-    train_loader = IndexedLoader(dataset)
-    test_loader = IndexedLoader(dataset)
-    trainer = mango.ScikitTrainer(model, train_loader, test_loader)
+    loader = MiniBatchLoader(dataset)
+    trainer = mango.SimpleTrainer(model, loader)

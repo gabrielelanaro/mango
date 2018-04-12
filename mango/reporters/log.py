@@ -17,10 +17,12 @@ class LogReporter:
                 version = max(int(d) for d in subdirs) + 1
 
         out = os.path.join(logdir, f'{version:04d}')
-        os.makedirs(out)
         return out
 
     def _write(self, fname, data):
+        if not os.path.exists(self.logdir):
+            os.makedirs(out)
+
         with open(fname, 'a+') as fd:
             fd.write(data)
 
