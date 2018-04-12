@@ -15,9 +15,7 @@ def train(experiment):
         return
 
     exp = Experiment()
-    exp.dataset.load()
-    exp.model.initialize()
-    exp.trainer.train()
+    exp.run()
 
 if __name__ == '__main__':
     cli()

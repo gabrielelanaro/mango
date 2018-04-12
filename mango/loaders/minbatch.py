@@ -10,6 +10,9 @@ class MiniBatchLoader(Parameterized):
         self.batch_size = batch_size
         self.dataset = dataset
 
+    def build(self):
+        self.dataset.build()
+
     def train(self):
         self._data = self.dataset.train()
         self._transform = self.dataset.transform_train

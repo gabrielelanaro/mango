@@ -1,5 +1,5 @@
 import os
-
+import json
 
 class LogReporter:
 
@@ -34,3 +34,10 @@ class LogReporter:
         name = name.replace('/', '.')
         scalar_fname = os.path.join(self.logdir, f'{name}.csv')
         self._write(scalar_fname, f'{iteration}\t{value}\n')
+
+    def add_parameters(self, name, params):
+        fname = os.path.join(self.logdir, '{name}.json')
+        self._write(json.dumps(params,
+                               sort_keys=True,
+...                            indent=2,
+                               separators=(',', ': ')))

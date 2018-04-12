@@ -42,6 +42,9 @@ class Parameterized:
             if isinstance(v, Param):
                 cls.params[k] = v
 
+    def meta(self):
+        return {p_key: p_val.__get__(self, type(self))
+                for p_key, p_val in self.params.items()}
 
 class ValidationError(Exception):
     pass

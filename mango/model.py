@@ -10,11 +10,5 @@ class Model(Parameterized):
         else:
             self.reporter = reporter
 
-    def initialize(self):
+    def build(self):
         pass
-
-    def train(self):
-        raise NotImplementedError()
-
-    def predict(self):
-        raise NotImplementedError()
