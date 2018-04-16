@@ -1,19 +1,19 @@
-from mango import Dataset
+from mango.dataset import SplitDataset
 
-class StupidDataset(Dataset):
+class StupidDataset(SplitDataset):
 
-    def load(self):
-        self.X = [0, 1, 2, 3, 4, 5]
-        self.y = [0, 1, 2, 3, 4, 5]
+    def build(self):
+        self.X_train = [0, 1, 2, 3, 4, 5]
+        self.y_train = [0, 1, 2, 3, 4, 5]
 
     def train(self):
-        return Transform(self.X_train)
+        return self.X_train, self.y_train
 
     def eval(self):
-        return self.y_train
+        return self.X_train
 
 
-class IndexedDataset(Dataset):
+class IndexedDataset(SplitDataset):
 
-    def load(self):
+    def build(self):
         self.data = []

@@ -1,33 +1,40 @@
-from .base import Param, Parameterized
-from typing import NamedTuple
-import random
-from toolz import partition
 import numpy as np
+import random
+
+from typing import NamedTuple
+from toolz import partition
+
+
+from .base import Param, Parameterized
 
 
 class Trainer(Parameterized):
     pass
 
-
 class SimpleTrainer(Trainer):
 
-    def __init__(self, model, loader):
+    def __init__(self, model, loader, **kwargs):
+        super().__init__(**kwargs)
         self.model = model
         self.loader = loader
 
     def train(self):
+        self.build()
+
         self.loader.train()
         self.model.train(self.loader)
 
+    def build(self):
+        self.model.build()
+        self.loader.build()
 
-class MiniBatchTrainer(Trainer):
+
+class MiniBatchTrainer(SimpleTrainer):
 
     epochs = Param(int, 10)
 
     def __init__(self, model, loader, epochs=10):
-        super().__init__(epochs=epochs)
-        self.model = model
-        self.loader = loader
+        super().__init__(model, loader, epochs=epochs)
 
     def train(self):
         for j in range(self.epochs):

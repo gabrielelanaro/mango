@@ -39,5 +39,5 @@ class LogReporter:
         fname = os.path.join(self.logdir, '{name}.json')
         self._write(json.dumps(params,
                                sort_keys=True,
-...                            indent=2,
+                               indent=2,
                                separators=(',', ': ')))

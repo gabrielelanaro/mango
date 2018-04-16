@@ -1,3 +1,7 @@
+import random
+
+from toolz import partition
+
 from ..base import Param, Parameterized
 
 

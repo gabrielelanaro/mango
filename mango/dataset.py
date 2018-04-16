@@ -7,7 +7,7 @@ class Dataset(Parameterized):
 
 class SplitDataset(Dataset):
 
-    def load(self):
+    def build(self):
         raise NotImplementedError()
 
     def train(self):
@@ -17,7 +17,7 @@ class SplitDataset(Dataset):
         raise NotImplementedError()
 
     def transform_train(self, data):
-        raise NotImplementedError()
+        return data
 
     def transform_test(self, data):
-        raise NotImplementedError()
+        return data
