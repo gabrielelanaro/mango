@@ -20,9 +20,8 @@ class SimpleTrainer(Trainer):
 
     def train(self):
         self.build()
-
         self.loader.train()
-        self.model.train(self.loader)
+        self.model.train(self.loader.transform(self.loader.data))
 
     def build(self):
         self.model.build()

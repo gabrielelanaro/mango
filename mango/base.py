@@ -6,8 +6,11 @@ class Param:
         self.type = type
 
     def __get__(self, instance, owner):
-        return instance.__dict__[self.name]
-
+        if self.default is None:
+            return instance.__dict__[self.name]
+        else:
+            return instance.__dict__.get(self.name, self.default)
+    
     def __set__(self, instance, value):
         if not isinstance(value, self.type):
             raise ValidationError(f'Parameter {self.name} should be of type {self.type.__name__}')

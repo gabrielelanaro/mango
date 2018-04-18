@@ -21,7 +21,7 @@ class LogReporter:
 
     def _write(self, fname, data):
         if not os.path.exists(self.logdir):
-            os.makedirs(out)
+            os.makedirs(self.logdir)
 
         with open(fname, 'a+') as fd:
             fd.write(data)
@@ -35,9 +35,9 @@ class LogReporter:
         scalar_fname = os.path.join(self.logdir, f'{name}.csv')
         self._write(scalar_fname, f'{iteration}\t{value}\n')
 
-    def add_parameters(self, name, params):
-        fname = os.path.join(self.logdir, '{name}.json')
-        self._write(json.dumps(params,
-                               sort_keys=True,
-                               indent=2,
-                               separators=(',', ': ')))
+    def add_parameters(self, params):
+        fname = os.path.join(self.logdir, 'parameters.json')
+        self._write(fname, json.dumps(params,
+                                      sort_keys=True,
+                                      indent=2,
+                                      separators=(',', ': ')))

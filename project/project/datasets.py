@@ -7,10 +7,10 @@ class StupidDataset(SplitDataset):
         self.y_train = [0, 1, 2, 3, 4, 5]
 
     def train(self):
-        return self.X_train, self.y_train
+        return {'X': self.X_train, 'y': self.y_train}
 
     def eval(self):
-        return self.X_train
+        return {'y': self.X_train}
 
 
 class IndexedDataset(SplitDataset):
