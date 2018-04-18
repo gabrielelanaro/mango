@@ -18,15 +18,15 @@ class MiniBatchLoader(Parameterized):
         self.dataset.build()
 
     def train(self):
-        self._data = self.dataset.train()
-        self._transform = self.dataset.transform_train
+        self.data = self.dataset.train()
+        self.transform = self.dataset.transform_train
 
     def test(self):
-        self._data = self.dataset.test()
-        self._transform = self.dataset.transform_test
+        self.data = self.dataset.test()
+        self.transform = self.dataset.transform_test
 
     def __iter__(self):
-        size = len(self._data)
+        size = len(self.data)
         randomized = list(range(size))
         random.shuffle(randomized)
 
@@ -34,7 +34,7 @@ class MiniBatchLoader(Parameterized):
             if len(batch) == 0:
                 continue
 
-            yield self._transform([self._data[b] for b in batch])
+            yield self._transform([self.data[b] for b in batch])
 
     def __len__(self):
-        return len(self._data) // self.batch_size
+        return len(self.data) // self.batch_size

@@ -1,13 +1,13 @@
 import mango
 import mango.reporters as reporters
 
-from mango.loaders import SimpleLoader
+from mango.loaders import SimpleLoader, MiniBatchLoader
 from mango.reporters.tensorboard import TensorboardReporter
-from mango.trainer import SimpleTrainer
+from mango.trainer import SimpleTrainer, MiniBatchTrainer
 from .models import StupidModel
 from .datasets import StupidDataset
 
-class Test(mango.Experiment):
+class SimpleTest(mango.Experiment):
     reporter = reporters.CombinedReporter([
         reporters.TextReporter(),
         reporters.LogReporter('logs'),
@@ -20,3 +20,13 @@ class Test(mango.Experiment):
     )
     loader = SimpleLoader(dataset)
     trainer = SimpleTrainer(model, loader)
+
+
+class MiniBatch(mango.Experiment):
+    reporter = reporters.TextReporter()
+    dataset = StupidDataset()
+    model = StupidModel(
+        const=1.0
+    )
+    loader = MiniBatchLoader(dataset, batch_size=32)
+    trainer = MiniBatchTrainer(model, loader)
