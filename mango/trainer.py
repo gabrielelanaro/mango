@@ -38,16 +38,17 @@ class MiniBatchTrainer(SimpleTrainer):
         self._validate_model(model)
 
     def train(self):
+        self.model.build()
         self.loader.build()
 
         for j in range(self.epochs):
             self.loader.train()
             for i, batch in enumerate(self.loader):
                 step_info = StepInfo(step=i,
-                                     max_steps=len(loader),
+                                     max_steps=len(self.loader),
                                      epoch=j,
                                      max_epoch=self.epochs,
-                                     global_step=i + j * len(loader))
+                                     global_step=i + j * len(self.loader))
                 self.model.batch(batch, step_info)
             self.model.epoch(step_info, self.loader)
 

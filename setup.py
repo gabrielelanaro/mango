@@ -7,5 +7,6 @@ setup(name='mango',
       author='Flying Circus',
       author_email='flyingcircus@example.com',
       license='MIT',
+      install_requires=['click'],
       packages=find_packages(),
       zip_safe=False)

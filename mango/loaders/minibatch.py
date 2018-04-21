@@ -34,7 +34,7 @@ class MiniBatchLoader(Parameterized):
             if len(batch) == 0:
                 continue
 
-            yield self._transform([self.data[b] for b in batch])
+            yield self.transform([self.data[b] for b in batch])
 
     def __len__(self):
         return len(self.data) // self.batch_size
