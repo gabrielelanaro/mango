@@ -3,7 +3,7 @@
 Mango-ml is a machine learning framework designed for fast experimentation.
 
 Mango provides a set of interfaces and guidelines to build and maintain
-machine learning models, including support for logging and keeping track
+machine learning models, including support for advanced logging and keeping track
 of parameters between runs.
 
 # Quick start
@@ -17,8 +17,7 @@ and code reuse:
 - Reporter
 - Experiment
 
-The following file represent a complete project structure for mango. 
-
+The following file represent a very simple classification system written with mango. 
 
 ```
 import mango
@@ -73,6 +72,43 @@ Once we defined our Experiment, we can run it using the following command:
 ```
 mango train example.Main
 ```
+
+## Minibatch training
+
+Many machine learning system support long running times and minibatch training, we'll see how to create a simple minibatch trainer using mango
+
+```
+
+class Dataset(mango.BatchedDataset):
+  
+  def build(self):
+      random.seed(self.seed)
+      X, y = make_classification()
+      self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(X, y)
+    
+
+
+class Logistic(mango.BatchModel):
+
+  def build(self):
+    pass
+    
+  def batch(self, batch, step_info):
+    pass
+  
+  def epoch(self, loader, step_info):
+    pass
+ 
+
+
+class MiniBatch(mango.experiment)
+  
+  dataset = Dataset()
+  model = mango.BatchModel()
+
+```
+
+
 
 
 ## Improving code structure
