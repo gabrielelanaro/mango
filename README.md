@@ -88,7 +88,7 @@ class Dataset(mango.BatchedDataset):
     
 
 
-class Logistic(mango.BatchModel):
+class BatchLogistic(mango.BatchModel):
 
   def build(self):
     pass
