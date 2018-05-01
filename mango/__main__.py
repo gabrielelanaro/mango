@@ -6,16 +6,19 @@ from pydoc import locate
 def cli():
     pass
 
+
 @cli.command()
 @click.argument('experiment')
-def train(experiment):
+@click.argument('param', nargs=-1)
+def train(experiment, param):
     Experiment = locate(experiment)
     if Experiment is None:
         click.echo(f'Class {experiment} not found')
         return
 
-    exp = Experiment()
+    exp = Experiment.create(param)
     exp.run()
+
 
 if __name__ == '__main__':
     cli()

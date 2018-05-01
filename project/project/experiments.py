@@ -4,8 +4,10 @@ import mango.reporters as reporters
 from mango.loaders import SimpleLoader, MiniBatchLoader
 from mango.reporters.tensorboard import TensorboardReporter
 from mango.trainer import SimpleTrainer, MiniBatchTrainer
-from .models import StupidModel
-from .datasets import StupidDataset
+
+from project.models import StupidModel
+from project.datasets import StupidDataset
+
 
 class SimpleTest(mango.Experiment):
     reporter = reporters.CombinedReporter([
